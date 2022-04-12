@@ -52,20 +52,18 @@ export const Navbar = ({ setIsOpenSidebar, isOpenSidebar }: NavbarProps) => {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={() => setIsOpenSidebar(true)}
+            onClick={() => setIsOpenSidebar(!isOpenSidebar)}
             edge="start"
             sx={{
               marginRight: 5,
-              ...(isOpenSidebar && { display: "none" }),
+              // ...(isOpenSidebar && { display: "none" }),
             }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-          ></Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            LOGO
+          </Typography>
           <div>
             <IconButton color="inherit">
               {selectedTheme === THEMES.NATURE && (

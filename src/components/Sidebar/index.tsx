@@ -1,6 +1,5 @@
 import {
   Divider,
-  Drawer as MuiDrawer,
   IconButton,
   List,
   ListItem,
@@ -8,33 +7,38 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  useTheme,
+  // Drawer as TemporaryDrawer,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
 import { SidebarProps } from "./sidebarType";
-import { Drawer, DrawerHeader } from "./styled";
+import { PermanentDrawer, DrawerHeader, TemporaryDrawer } from "./styled";
 import { useMemo, useState } from "react";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 export const Sidebar = ({ isOpen, setIsOpen, sidebarItems }: SidebarProps) => {
   const router = useRouter();
-  const theme = useTheme();
   const [isOpenIfNotPinned, setIsOpenIfNotPinned] = useState(false);
 
+  const [innerWidtth] = useWindowSize();
+
   const openSidebar = useMemo(
-    () => isOpen || isOpenIfNotPinned,
-    [isOpen, isOpenIfNotPinned]
+    () => (innerWidtth <= 760 ? isOpen : isOpen || isOpenIfNotPinned),
+    [isOpen, isOpenIfNotPinned, innerWidtth]
   );
+
+  const Drawer = innerWidth <= 760 ? TemporaryDrawer : PermanentDrawer;
 
   return (
     <Drawer
-      variant="permanent"
+      variant={innerWidtth <= 760 ? "temporary" : "permanent"}
       role="presentation"
       onMouseEnter={() => setIsOpenIfNotPinned(true)}
       onMouseLeave={() => setIsOpenIfNotPinned(false)}
       open={openSidebar}
+      ModalProps={{ keepMounted: true }}
     >
       <DrawerHeader>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
