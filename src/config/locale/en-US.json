@@ -1,5 +1,8 @@
 {
   "EMAIL": "Email",
   "PASSWORD": "Password",
-  "LOGIN": "Login"
+  "LOGIN": "Login",
+  "PORTUGUESE": "Protuguese",
+  "ENGLISH": "English",
+  "SPANISH": "Spanish"
 }

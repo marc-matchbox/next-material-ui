@@ -21,7 +21,6 @@ export const FormLogin = ({ onSubmit }: FormLoginProps) => {
       initialValues={initialValues}
       onSubmit={(values, formikHelpers) => {
         onSubmit(values, formikHelpers);
-        formikHelpers.setSubmitting(false);
       }}
     >
       {({ isSubmitting }) => {

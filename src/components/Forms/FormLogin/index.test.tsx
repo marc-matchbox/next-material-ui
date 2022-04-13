@@ -3,7 +3,7 @@ import { render, waitFor, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FormLogin } from ".";
 
-describe("Shoul testing LoginForm", () => {
+describe("Should testing LoginForm", () => {
   const handleSubmit = jest.fn();
 
   it("should be show FormLogin", async () => {
@@ -19,13 +19,15 @@ describe("Shoul testing LoginForm", () => {
     const emailValue = "marc@teste.com";
     const passwordValue = "12345678";
 
+    const user = userEvent.setup();
+
     // catch field email and input 'marc@teste.com' in value field
-    userEvent.type(inputEmail, emailValue, { delay: 1 });
+    await user.type(inputEmail, emailValue);
 
     // catch field password and input '12345678' in value field
-    userEvent.type(inputPassword, passwordValue, { delay: 1 });
+    await user.type(inputPassword, passwordValue);
 
-    await waitFor(() => userEvent.click(screen.getByRole("button")));
+    await user.click(screen.getByRole("button"));
 
     await waitFor(() =>
       expect(handleSubmit).toHaveBeenCalledWith({

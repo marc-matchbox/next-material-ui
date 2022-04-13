@@ -29,7 +29,10 @@ export const Sidebar = ({ isOpen, setIsOpen, sidebarItems }: SidebarProps) => {
     [isOpen, isOpenIfNotPinned, innerWidtth]
   );
 
-  const Drawer = innerWidth <= 760 ? TemporaryDrawer : PermanentDrawer;
+  const Drawer =
+    process.browser && window.innerWidth <= 760
+      ? TemporaryDrawer
+      : PermanentDrawer;
 
   return (
     <Drawer
